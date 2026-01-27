@@ -1,0 +1,25 @@
+{
+  "name": "online-otrio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThSsilentKnight/Online-Otrio-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ThSsilentKnight/Online-Otrio-Project/issues"
+  },
+  "homepage": "https://github.com/ThSsilentKnight/Online-Otrio-Project#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
+  }
+}
