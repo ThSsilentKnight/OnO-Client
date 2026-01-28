@@ -1,7 +1,7 @@
 import { colorConversion, getClientId, getRoomId, regenerateBoard, } from "../utils/helpers.js";
 import { requestRejoinRoom, requestWinCheck } from "./requests.js";
-export const ws = new WebSocket(`wss://ono-server-production.up.railway.app`);
-//export const ws = new WebSocket("ws://localhost:8080");
+//export const ws = new WebSocket(`wss://ono-server-production.up.railway.app`);
+export const ws = new WebSocket("ws://localhost:8080");
 ws.addEventListener("open", () => {
     console.log("Client Connected");
     const clientId = getClientId();

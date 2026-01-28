@@ -65,7 +65,7 @@ export function colorConversion(color) {
         case "BLUE":
             return "rgb(20, 130, 200)";
         case "GREEN":
-            return "rgb(20, 230, 50)";
+            return "rgb(54, 205, 77)";
         case "RED":
             return "rgb(230, 25, 25)";
         default:
