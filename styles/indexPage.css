@@ -1,74 +1,52 @@
+/* Reset + base */
 body {
-    margin: 0;
-    font-family: "prompt", sans-serif;
-    color: white;
-    background-color: rgb(0, 0, 30);
-    overflow-x: hidden;
+  margin: 0;
+  font-family: "Prompt", sans-serif;
+  color: white;
+  background-color: rgb(0, 0, 30);
+  overflow-x: hidden;
 }
 
-section {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    min-height: 100px;
-
+section, footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
+/* Headings */
 h1 {
-    position: inherit;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    font-size: 2rem;
-    font-weight: 600;
-    text-align: center;
-
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  position: absolute; /* overlays parent */
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 3rem); /* responsive font size */
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  pointer-events: none;
 }
 
-.blue {
-    background-color: rgb(20, 130, 200)
-}
+/* Background colors */
+.blue { background-color: rgb(20, 130, 200); }
+.green { background-color: rgb(50, 200, 70); }
 
-.green {
-    background-color: rgb(50, 200, 70)
-}
-
+/* Spacer for images */
 .spacer {
-    aspect-ratio: 900/540;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* more natural than fixed 900/600 */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
 }
 
-.layer1 {
-    background-image: url("../images/layer1.svg");
-    padding: 50px;
-}
-
-.layer2 {
-    background-image: url("../images/layer2.svg");
-    padding: 200px;
-}
-
-.layer3 {
-    background-image: url("../images/layer3.svg");
-    padding: 20px;
-}
-
-.layer4 {
-    background-image: url("../images/layer4.svg");
-    padding: 20px;
-}
-
-.edge1 {
-    background-image: url("../images/edge1.svg");
-    padding: 20px;
-}
+/* Layers (remove padding — scale naturally instead) */
+.layer1 { background-image: url("../images/layer1.svg"); }
+.layer2 { background-image: url("../images/layer2.svg"); }
+.layer3 { background-image: url("../images/layer3.svg"); }
+.layer5 { background-image: url("../images/layer5.svg"); }
+.edge1  { background-image: url("../images/edge1.svg"); }
