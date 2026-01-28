@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnO Landing</title>
+    <link rel="stylesheet" href="/client/styles/styles.css">
+    <script type="module" src="/client/main/index.js" defer></script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <div class="container">
+        <div id="innerContainer">
+            <button class="menuButton" id="join">
+                <a href="#efs">Join Game</a>
+            </button>
+
+            <button class="menuButton" id="create" data-modal-target="#modal">
+                <a href="#">Create Game</a>
+            </button>
+
+            <button class="menuButton" id="bot">
+                <a href="#">Play Bots</a>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modalHeader">
+            <div class="title">Options</div>
+            <button class="closeButton" data-close-button="closeButton">
+                &times;
+            </button>
+        </div>
+
+        <div class="modalBody">
+            <button class="modalButton">Public</button>
+            <button class="modalButton">Private</button>
+        </div>
+
+        <div class="modalFooter">
+            <button class="menuButton" id="host">
+                <a href="#">Host Game</a>
+            </button>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+</body>
+
+</html>
