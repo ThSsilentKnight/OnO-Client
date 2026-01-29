@@ -26,13 +26,9 @@ footer {
 }
 
 .layer3 {
-    background-image: url("/images/layer3.svg");
+    background-image: url("/layer3.svg");
 }
 
 .layer5 {
-    background-image: url("/images/layer5.svg");
-}
-
-.edge1 {
-    background-image: url("/images/edge1.svg");
+    background-image: url("/layer5.svg");
 }
