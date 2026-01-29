@@ -15,23 +15,6 @@ footer {
     justify-content: center;
 }
 
-
-h1 {
-    position: absolute;
-
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: clamp(1.5rem, 5vw, 3rem);
-
-    font-weight: 600;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    pointer-events: none;
-}
-
 .spacer {
     width: 100%;
     aspect-ratio: 16 / 9;
