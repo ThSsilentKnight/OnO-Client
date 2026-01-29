@@ -1,52 +1,55 @@
-/* Reset + base */
 body {
-  margin: 0;
-  font-family: "Prompt", sans-serif;
-  color: white;
-  background-color: rgb(0, 0, 30);
-  overflow-x: hidden;
+    margin: 0;
+    font-family: "Prompt", sans-serif;
+    color: white;
+    background-color: rgb(0, 0, 30);
+    overflow-x: hidden;
 }
 
-section, footer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Headings */
+
 h1 {
-  position: absolute; /* overlays parent */
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: clamp(1.5rem, 5vw, 3rem); /* responsive font size */
-  font-weight: 600;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  pointer-events: none;
+    position: absolute;
+
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
 }
 
-/* Background colors */
-.blue { background-color: rgb(20, 130, 200); }
-.green { background-color: rgb(50, 200, 70); }
-
-/* Spacer for images */
 .spacer {
-  width: 100%;
-  aspect-ratio: 16 / 9; /* more natural than fixed 900/600 */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
 
-/* Layers (remove padding — scale naturally instead) */
-.layer1 { background-image: url("../images/layer1.svg"); }
-.layer2 { background-image: url("../images/layer2.svg"); }
-.layer3 { background-image: url("../images/layer3.svg"); }
-.layer5 { background-image: url("../images/layer5.svg"); }
-.edge1  { background-image: url("../images/edge1.svg"); }
+.layer3 {
+    background-image: url("../images/layer3.svg");
+}
+
+.layer5 {
+    background-image: url("../images/layer5.svg");
+}
+
+.edge1 {
+    background-image: url("../images/edge1.svg");
+}
