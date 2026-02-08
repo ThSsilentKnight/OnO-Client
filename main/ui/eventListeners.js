@@ -4,6 +4,7 @@ import { body, closeGameMenu, createGameBtn, createGameMenu, joinBtn, ring1, rin
 // Game Creation
 createGameBtn?.addEventListener("click", () => {
     const roomId = generateRoomId();
+    console.log("click");
     localStorage.setItem("currentRoom", String(roomId));
     requestNewRoom(roomId);
     requestJoinRoom(getClientId(), roomId);

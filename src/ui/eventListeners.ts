@@ -19,9 +19,6 @@ import {
   closeGameMenu,
   createGameBtn,
   createGameMenu,
-  dummyRing1,
-  dummyRing2,
-  dummyRing3,
   joinBtn,
   ring1,
   ring2,
@@ -32,6 +29,7 @@ import {
 // Game Creation
 createGameBtn?.addEventListener("click", () => {
   const roomId = generateRoomId();
+  console.log("click")
 
   localStorage.setItem("currentRoom", String(roomId));
 

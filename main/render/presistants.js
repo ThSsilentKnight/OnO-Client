@@ -1,15 +1,4 @@
 "use strict";
-fetch("../components/navbar.html")
-    .then((res) => res.text())
-    .then((html) => {
-    const navbar = document.getElementById("navbar");
-    if (navbar) {
-        navbar.innerHTML = html;
-    }
-    else {
-        console.log("navbar not found");
-    }
-});
 fetch("../components/buttons.html")
     .then((res) => res.text())
     .then((html) => {
@@ -24,12 +13,23 @@ fetch("../components/buttons.html")
 fetch("../components/otrioBoard.fragment")
     .then((res) => res.text())
     .then((html) => {
-    const board = document.getElementById("otrioBoard");
-    console.log(html);
-    if (board) {
-        board.innerHTML = html;
-    }
-    else {
-        console.log("Otrio Board not found");
-    }
+    document.querySelectorAll("[data-size]").forEach((cell) => {
+        cell.innerHTML = html;
+        const values = cell.getAttribute("data-values");
+        const fullRing = cell.querySelectorAll(".otrioCell");
+        if (values) {
+            const ringIndexes = values.split("");
+            ringIndexes.forEach((ringIndex) => {
+                const ring = document.getElementById(ringIndex);
+                if (ring) {
+                    ring.style.stroke = "rgb(20, 130, 200)";
+                }
+            });
+        }
+        if (fullRing) {
+            fullRing.forEach((element) => {
+                element.setAttribute("width", `${cell.getAttribute("data-size")}vh`);
+            });
+        }
+    });
 });

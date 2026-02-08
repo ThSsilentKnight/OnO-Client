@@ -4,51 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnO Landing</title>
-    <link rel="stylesheet" href="../styles/styles.css">
-    <script type="module" src="../main/index.js" defer></script>
+    <title>OnO Menu</title>
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/menuStyles.css">
+    <script type="module" src="../main/index.js"></script>
 </head>
 
 <body>
-    <div id="navbar"></div>
+    <div class="spacer section1">
+        <div class="container">
+            <div class="welcomeContainer">
+                <h3>Welcome To Online Otrio</h3>
+            </div>
+            <div class="titleBox">
+                <h1 class="title main">Otrio</h1>
+                <h2 class="title sub">Online</h2>
+            </div>
+            <div class="buttonBox">
+                <div id="host" data-text="Host Game"></div>
+                <div id="join" data-text="Join Game"></div>
+                <div id="bots" data-text="Play Bots"></div>
+            </div>
+            <div class="modal">
+                <div class="modalHeader">
+                    <div class="modalTitle">Game Creation</div>
+                    <button class="modalCloseButton">&times;</button>
+                </div>
 
-    <div class="container">
-        <div id="innerContainer">
-            <button class="menuButton" id="join">
-                <a href="#efs">Join Game</a>
-            </button>
+                <div class="modalContents">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque minus aliquid eius accusantium
+                    officia iste soluta illum omnis doloribus labore!
+                </div>
+            </div>
+            <div id="overlay"></div>
 
-            <button class="menuButton" id="create" data-modal-target="#modal">
-                <a href="#">Create Game</a>
-            </button>
-
-            <button class="menuButton" id="bot">
-                <a href="#">Play Bots</a>
-            </button>
         </div>
+
     </div>
 
-    <div class="modal" id="modal">
-        <div class="modalHeader">
-            <div class="title">Options</div>
-            <button class="closeButton" data-close-button="closeButton">
-                &times;
-            </button>
+    <div class="spacer section2">
+        <div class="ruleText">
+            <h1> - How to win -</h1>
         </div>
 
-        <div class="modalBody">
-            <button class="modalButton">Public</button>
-            <button class="modalButton">Private</button>
-        </div>
+        <div class="rulesContainer">
+            <div class="fullCard">
+                <div class="miniCard">
+                    <h4 class="preHeader">Same size line:</h4>
+                </div>
 
-        <div class="modalFooter">
-            <button class="menuButton" id="host">
-                <a href="#">Host Game</a>
-            </button>
+                <div class="card">
+                    <div class="cardText">
+                        <p>Place three rings of the same size in a row.</p>
+                    </div>
+                    <div class="dash"></div>
+                    <div class="otrioBoard" data-size="8" data-values="2 5 8"></div>
+                </div>
+            </div>
+            <div class="fullCard">
+                <div class="miniCard">
+                    <h4 class="preHeader">Mixed size line:</h4>
+                </div>
+
+                <div class="card">
+                    <div class="cardText">
+                        <p>Place three small, medium, and large rings in a row.</p>
+                    </div>
+                    <div class="dash"></div>
+                    <div class="otrioBoard" data-size="8"></div>
+                </div>
+            </div>
+
+            <div class="fullCard">
+                <div class="miniCard">
+                    <h4 class="preHeader">Concentric stack:</h4>
+                </div>
+
+                <div class="card">
+                    <div class="cardText">
+                        <p>Stack three small, medium, and large rings in one space.</p>
+                    </div>
+                    <div class="dash"></div>
+                    <div class="otrioBoard" data-size="8"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div id="overlay"></div>
 </body>
 
 </html>
