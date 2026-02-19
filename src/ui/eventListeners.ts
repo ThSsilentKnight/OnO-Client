@@ -16,10 +16,16 @@ import {
 } from "../utils/helpers.js";
 import {
   body,
-  closeGameMenu,
+  closeModalButtons,
   createGameBtn,
   createGameMenu,
+  dragableItems,
   joinBtn,
+  maxPlayers,
+  openModalButtons,
+  overlay,
+  pullPlayerLimit,
+  pushPlayerLimit,
   ring1,
   ring2,
   ring3,
@@ -29,7 +35,7 @@ import {
 // Game Creation
 createGameBtn?.addEventListener("click", () => {
   const roomId = generateRoomId();
-  console.log("click")
+  console.log("click");
 
   localStorage.setItem("currentRoom", String(roomId));
 
@@ -51,14 +57,6 @@ joinBtn?.addEventListener("click", () => {
     window.location.assign(
       `game.html#id=${localStorage.getItem("currentRoom")}`,
     );
-  }
-});
-
-createGameMenu?.addEventListener("click", () => {
-  const modalTarget = createGameMenu?.dataset.modalTarget;
-  if (modalTarget) {
-    const modal = document.querySelector(modalTarget);
-    openModal(modal);
   }
 });
 
@@ -89,15 +87,6 @@ startBtn?.addEventListener("click", () => {
   requestStartGame(getRoomId());
 });
 
-closeGameMenu.forEach((button) => {
-  const el = button as HTMLElement;
-
-  el.addEventListener("click", () => {
-    const modal = button.closest(".modal");
-    closeModal(modal);
-  });
-});
-
 body?.addEventListener("touchstart", dragStart, false);
 body?.addEventListener("touchend", dragEnd, false);
 body?.addEventListener("touchmove", drag, false);
@@ -105,3 +94,63 @@ body?.addEventListener("touchmove", drag, false);
 body?.addEventListener("mousedown", dragStart, false);
 body?.addEventListener("mouseup", dragEnd, false);
 body?.addEventListener("mousemove", drag, false);
+
+
+
+overlay?.addEventListener("click", () => {
+  const modals = document.querySelectorAll(".modal.active");
+  modals.forEach((modal) => {
+    closeModal(modal);
+  });
+});
+
+openModalButtons.forEach((button) => {
+  const el = button as HTMLElement;
+  el.addEventListener("click", () => {
+    const modalTarget = el.dataset.modalTarget;
+    if (modalTarget) {
+      const modal = document.querySelector(modalTarget);
+      openModal(modal);
+    }
+  });
+});
+closeModalButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closeModal(modal);
+  });
+});
+let limit = Number(maxPlayers?.textContent);
+pushPlayerLimit?.addEventListener("click", () => {
+  if (limit > 0 && limit <= 3) {
+    maxPlayers?.classList.remove("hop");
+    void maxPlayers?.offsetWidth;
+    maxPlayers?.classList.add("hop");
+    limit++;
+
+    if (maxPlayers) {
+      maxPlayers.textContent = String(limit);
+    }
+  } else {
+    maxPlayers?.classList.remove("shake");
+    void maxPlayers?.offsetWidth;
+    maxPlayers?.classList.add("shake");
+  }
+});
+
+pullPlayerLimit?.addEventListener("click", () => {
+  if (limit >= 2 && limit <= 4) {
+    maxPlayers?.classList.remove("hop");
+    void maxPlayers?.offsetWidth;
+    maxPlayers?.classList.add("hop");
+    limit--;
+
+    if (maxPlayers) {
+      maxPlayers.textContent = String(limit);
+    }
+  } else {
+    maxPlayers?.classList.remove("shake");
+    void maxPlayers?.offsetHeight;
+    maxPlayers?.classList.add("shake");
+  }
+});

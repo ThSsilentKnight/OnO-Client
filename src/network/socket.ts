@@ -36,7 +36,7 @@ ws.addEventListener("close", () => {
 
 ws.addEventListener("message", (event) => {
   const request = JSON.parse(event.data);
-  console.log("Action received:", request.action);
+  console.log("Request received:", request.action);
 
   switch (request.action) {
     case "request_client_id": {
@@ -58,13 +58,22 @@ ws.addEventListener("message", (event) => {
 
     case "request_start_game":
       localStorage.setItem("color", request.color);
+      document.documentElement.style.setProperty(
+        "--ring-color",
+        colorConversion(localStorage.getItem("color") || "red"),
+      );
+
       console.log(
         `Game has been start. your Color Is: ${localStorage.getItem("color")}`,
       );
-      document.getElementById("game__status")!.innerText = "Game Started";
+      document.getElementById("gameStatus")!.innerText = "Game Started";
       break;
 
     case "request_regenerate_board":
+      document.documentElement.style.setProperty(
+        "--ring-color",
+        colorConversion(localStorage.getItem("color") || "red"),
+      );
       regenerateBoard(request.board);
       break;
 

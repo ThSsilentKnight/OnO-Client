@@ -1,6 +1,6 @@
 import { requestBoardAction, requestJoinRoom, requestNewRoom, requestStartGame, } from "../network/requests.js";
 import { closeModal, drag, dragEnd, dragStart, generateRoomId, getClientId, getRoomId, openModal, } from "../utils/helpers.js";
-import { body, closeGameMenu, createGameBtn, createGameMenu, joinBtn, ring1, ring2, ring3, startBtn, } from "./dom.js";
+import { body, closeModalButtons, createGameBtn, joinBtn, maxPlayers, openModalButtons, overlay, pullPlayerLimit, pushPlayerLimit, ring1, ring2, ring3, startBtn, } from "./dom.js";
 // Game Creation
 createGameBtn?.addEventListener("click", () => {
     const roomId = generateRoomId();
@@ -19,13 +19,6 @@ joinBtn?.addEventListener("click", () => {
         localStorage.removeItem("color");
         localStorage.setItem("currentRoom", String(code)); // CHANGE LATER!
         window.location.assign(`game.html#id=${localStorage.getItem("currentRoom")}`);
-    }
-});
-createGameMenu?.addEventListener("click", () => {
-    const modalTarget = createGameMenu?.dataset.modalTarget;
-    if (modalTarget) {
-        const modal = document.querySelector(modalTarget);
-        openModal(modal);
     }
 });
 ring1.forEach((ring) => {
@@ -50,16 +43,64 @@ startBtn?.addEventListener("click", () => {
     console.log("A Player Has Started The Game");
     requestStartGame(getRoomId());
 });
-closeGameMenu.forEach((button) => {
-    const el = button;
-    el.addEventListener("click", () => {
-        const modal = button.closest(".modal");
-        closeModal(modal);
-    });
-});
 body?.addEventListener("touchstart", dragStart, false);
 body?.addEventListener("touchend", dragEnd, false);
 body?.addEventListener("touchmove", drag, false);
 body?.addEventListener("mousedown", dragStart, false);
 body?.addEventListener("mouseup", dragEnd, false);
 body?.addEventListener("mousemove", drag, false);
+overlay?.addEventListener("click", () => {
+    const modals = document.querySelectorAll(".modal.active");
+    modals.forEach((modal) => {
+        closeModal(modal);
+    });
+});
+openModalButtons.forEach((button) => {
+    const el = button;
+    el.addEventListener("click", () => {
+        const modalTarget = el.dataset.modalTarget;
+        if (modalTarget) {
+            const modal = document.querySelector(modalTarget);
+            openModal(modal);
+        }
+    });
+});
+closeModalButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const modal = button.closest(".modal");
+        closeModal(modal);
+    });
+});
+let limit = Number(maxPlayers?.textContent);
+pushPlayerLimit?.addEventListener("click", () => {
+    if (limit > 0 && limit <= 3) {
+        maxPlayers?.classList.remove("hop");
+        void maxPlayers?.offsetWidth;
+        maxPlayers?.classList.add("hop");
+        limit++;
+        if (maxPlayers) {
+            maxPlayers.textContent = String(limit);
+        }
+    }
+    else {
+        maxPlayers?.classList.remove("shake");
+        void maxPlayers?.offsetWidth;
+        maxPlayers?.classList.add("shake");
+    }
+});
+pullPlayerLimit?.addEventListener("click", () => {
+    if (limit >= 2 && limit <= 4) {
+        maxPlayers?.classList.remove("hop");
+        void maxPlayers?.offsetWidth;
+        maxPlayers?.classList.add("hop");
+        limit--;
+        if (maxPlayers) {
+            maxPlayers.textContent = String(limit);
+        }
+    }
+    else {
+        maxPlayers?.classList.remove("shake");
+        void maxPlayers?.offsetHeight;
+        maxPlayers?.classList.add("shake");
+    }
+});

@@ -23,3 +23,75 @@
         transform: translateY(-12px);
     }
 }
+
+@keyframes hop {
+    0% {
+        transform: translateY(0);
+        color: rgb(20, 150, 200);
+    }
+
+    25% {
+        transform: translateY(-10px);
+        color: rgb(20, 150, 200);
+    }
+
+    50% {
+        transform: translateY(-2px);
+        color: rgb(20, 150, 200);
+    }
+
+    75% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(0);
+        color: rgb(20, 150, 200);
+    }
+}
+
+@keyframes shake {
+
+    25% {
+
+        transform: translateX(-6px);
+        color: rgb(230, 25, 25);
+    }
+
+    50% {
+        transform: translateX(0px);
+        color: rgb(230, 25, 25);
+    }
+
+    75% {
+        transform: translateX(6px);
+        color: rgb(230, 25, 25);
+
+    }
+
+    100% {
+        transform: translateX(0px);
+        color: rgb(230, 25, 25);
+    }
+}
+
+@keyframes runBorder {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -1;
+    }
+}
+
+@keyframes fadeRing {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+
+}

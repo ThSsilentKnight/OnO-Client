@@ -3,8 +3,15 @@
     src: url(./Bungee-Regular.ttf);
 }
 
+/* Desktop View*/
+@media (min-width: 600px) {}
+
+/* Mobile View */
+@media (max-width: 600px) {}
+
 /* global View*/
 body {
+    display: grid;
     margin: 0;
     font-family: bungee;
     color: white;
@@ -16,10 +23,23 @@ p {
     font-size: 0.8rem;
 }
 
+button {
+    font-family: bungee;
+    color: white;
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 /* From Uiverse.io by mobinkakei */
 .cta {
     display: flex;
-    padding: 15px 45px;
+    padding: 10px 45px;
     text-decoration: none;
     font-size: 1.5rem;
     color: white;
@@ -98,9 +118,9 @@ p {
     grid-template-rows: repeat(3, 1fr);
     background-color: #232323;
     width: max-content;
-    border-radius: 10%;
+    border-radius: 6%;
     padding: 2.5px;
-    box-shadow: 2.5px 2.5px 0px rgba(0, 10, 0, 0.67);
+    box-shadow: 5.5px 5.5px 0.2px rgba(0, 10, 0, 0.67);
 
     grid-row: 3 /-1;
     align-self: center;
@@ -113,18 +133,68 @@ p {
     cursor: pointer;
 }
 
-.ring:hover {
-    stroke: #717676;
+.ring.hover {
+    fill: none;
+    stroke: var(--ring-color);
+    cursor: pointer;
+    opacity: 0.7;
+    stroke-width: 14;
 }
 
 .ring1 {
-    stroke-width: 13;
+    stroke-width: 12.5;
+}
+.ring1.hover {
+    stroke-width: 15;
 }
 
 .ring2 {
-    stroke-width: 12;
+    stroke-width: 11.5;
 }
 
 .ring3 {
-    stroke-width: 11;
+    stroke-width: 10.5;
 }
+
+.centerHitBox {
+    fill: #00ffbf8f;
+    stroke: #00ffbf8f;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.centerHitBox:hover {
+    fill: #717676;
+    stroke: #717676;
+}
+
+/*.highlightBorder {
+    position: relative;
+}
+
+.highlightBorder svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.highlightBorder rect {
+    fill: none;
+    stroke: #00eaff;
+    stroke-width: 6;
+    stroke-linecap: round;
+
+    /* segment length as % of perimeter 
+    stroke-dasharray: 0.12 1;
+    animation: runBorder 2s linear infinite;
+}
+
+@keyframes runBorder {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -1; }
+}
+*/

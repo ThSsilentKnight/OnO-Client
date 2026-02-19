@@ -1,53 +1,63 @@
+
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="2" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="1" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="0" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="5" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="4" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="3" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="8" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="7" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="6" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="11" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="10" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="9" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="14" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="13" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="12" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="17" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="16" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="15" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="20" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="19" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="18" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="23" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="22" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="21" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>
 
 <svg class="otrioCell" viewBox="0 0 120 120">
     <circle class="ring ring1" cx="60" cy="60" r="48" id="26" />
     <circle class="ring ring2" cx="60" cy="60" r="32" id="25" />
     <circle class="ring ring3" cx="60" cy="60" r="16" id="24" />
+    <rect class="centerHitBox" x="27" y="27" width="65" height="65" rx="5"/>
 </svg>

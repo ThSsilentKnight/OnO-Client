@@ -18,7 +18,7 @@ fetch("../components/otrioBoard.fragment")
         const values = cell.getAttribute("data-values");
         const fullRing = cell.querySelectorAll(".otrioCell");
         if (values) {
-            const ringIndexes = values.split("");
+            const ringIndexes = values.split(" ");
             ringIndexes.forEach((ringIndex) => {
                 const ring = document.getElementById(ringIndex);
                 if (ring) {
@@ -28,7 +28,7 @@ fetch("../components/otrioBoard.fragment")
         }
         if (fullRing) {
             fullRing.forEach((element) => {
-                element.setAttribute("width", `${cell.getAttribute("data-size")}vh`);
+                element.setAttribute("width", `${cell.getAttribute("data-size")}px`);
             });
         }
     });
