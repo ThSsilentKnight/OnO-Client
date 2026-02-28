@@ -14,17 +14,20 @@ fetch("../components/buttons.html")
 fetch("../components/otrioBoard.fragment")
   .then((res: Response) => res.text())
   .then((html: string) => {
-    document.querySelectorAll("[data-size]").forEach((cell) => {
-      cell.innerHTML = html;
+    document.querySelectorAll("[data-size]").forEach((board) => {
+      board.innerHTML = html;
 
-      const values = cell.getAttribute("data-values");
-      const fullRing = cell.querySelectorAll(".otrioCell");
+      const values = board.getAttribute("data-values");
+      const fullRing = board.querySelectorAll(".otrioCell");
 
       if (values) {
         const ringIndexes = values.split(" ");
 
         ringIndexes.forEach((ringIndex) => {
-          const ring = document.getElementById(ringIndex);
+          const ring = (board as HTMLElement).querySelector(
+            `.ring-${ringIndex}`,
+          ) as HTMLElement;
+
           if (ring) {
             ring.style.stroke = "rgb(20, 130, 200)";
           }
@@ -33,7 +36,10 @@ fetch("../components/otrioBoard.fragment")
 
       if (fullRing) {
         fullRing.forEach((element) => {
-          element.setAttribute("width", `${cell.getAttribute("data-size")}px`!);
+          element.setAttribute(
+            "width",
+            `${board.getAttribute("data-size")}px`!,
+          );
         });
       }
     });

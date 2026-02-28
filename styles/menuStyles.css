@@ -1,7 +1,11 @@
 /* Desktop View*/
 @media (min-width: 600px) {
+    html {
+        zoom: 1.2;
+    }
+
     .spacer {
-        width: 100%;
+        
         aspect-ratio: 16 / 9;
 
         background-repeat: no-repeat;
@@ -206,7 +210,6 @@
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
         transition: 200ms ease-in-out;
-        border: 3px solid rgb(0, 0, 0);
         border-radius: 1rem;
         z-index: 10;
         background-color: rgba(0, 0, 0, 0.8);
@@ -222,7 +225,7 @@
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
         transition: 200ms ease-in-out;
-        border: 2.5px solid rgba(0, 0, 0, 0.8);
+   
         border-radius: 1rem;
         z-index: 10;
         background-color: rgba(0, 00, 5, 0.8);
@@ -260,13 +263,14 @@
         font-weight: bold;
     }
 
-
     .modalContents {
         display: grid;
-        gap: 12px;
+
         justify-items: center;
-        text-align: center;
         padding: 5px 10px;
+    }
+    .mc1 .username {
+      margin: 20px;
     }
 
     #overlay {
@@ -285,55 +289,28 @@
         pointer-events: all;
     }
 
-    .maxPlayerSelector {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        position: relative;
-        top: 10px;
-    }
-
-    .maxPlayers {
-        font-size: 2rem;
-        min-width: 40px;
-        text-align: center;
-        color: rgb(20, 130, 200)
-    }
-
-    .hop {
-        animation: hop 300ms ease;
-    }
-
-    .shake {
-        animation: shake 300ms ease-in-out;
-    }
-
-    .contentTitle {
-        text-align: center;
-        font-size: 1.2rem;
-    }
-
-    #pushPlayerLimit {
-        font-size: 2.5rem;
-    }
-
-    #pullPlayerLimit {
-        font-size: 2.5rem;
-    }
-
-    #host {
-        position: relative;
-        top: 1.5rem;
-    }
-
-    .code {
+    .roomId {
         background: rgba(49, 49, 49, 0.9);
         border: rgba(0, 0, 0, 0.9);
         border-radius: 5px;
         color: rgba(255, 255, 255, 1);
         font-family: bungee;
         padding: 10px;
+        max-height: 15px;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .username {
+        background: rgba(49, 49, 49, 0.9);
+        border: rgba(0, 0, 0, 0.9);
+        border-radius: 5px;
+        color: rgba(255, 255, 255, 1);
+        font-family: bungee;
+        padding: 10px;
+        max-height: 15px;
+        align-self: center;
+        justify-self: center;
     }
 
     .join .cta {
@@ -346,15 +323,16 @@
         padding: 8px;
         padding-left: 30px;
         padding-right: 30px;
+        margin: 50px;
     }
 
     .mc2 {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
+        display: grid;
+        grid-template-rows: 0.7fr 0.7fr 1fr;
         min-height: 200px;
     }
+
+
 }
 
 /* Mobile View */

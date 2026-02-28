@@ -1,10 +1,9 @@
-import { requestBoardAction, requestClientId } from "../network/requests.js";
+import { requestBoardAction, requestClientId, requestClientRoomInfo, } from "../network/requests.js";
 import { dragableItems, overlay } from "../ui/dom.js";
 export function getRoomId() {
     const hash = window.location.hash;
     if (hash.startsWith("#id=")) {
         const roomId = hash.replace("#id=", "");
-        localStorage.setItem("currentRoom", roomId);
         return Number(roomId);
     }
     else {
@@ -16,7 +15,7 @@ export function generateRoomId() {
     return Math.floor(Math.random() * 90000 + 1000);
 }
 export function getClientId() {
-    const clientId = localStorage.getItem("clientId");
+    const clientId = sessionStorage.getItem("clientId");
     if (clientId === "null" || !clientId) {
         console.log("No client id found. requesting new client id");
         requestClientId();
@@ -166,21 +165,15 @@ export function selectedRingOperations(ringSize, selectedRing, option) {
         if (option === "play") {
             switch (ringSize) {
                 case "large":
-                    console.log(rings[0]);
                     requestBoardAction(rings[0].id, getRoomId());
-                    rings[0].classList.add("played");
                     rings[0].classList.remove("hover");
                     break;
                 case "medium":
-                    console.log(rings[1]);
                     requestBoardAction(rings[1].id, getRoomId());
-                    rings[1].classList.add("played");
                     rings[1].classList.remove("hover");
                     break;
                 case "small":
-                    console.log(rings[2]);
                     requestBoardAction(rings[2].id, getRoomId());
-                    rings[2].classList.add("played");
                     rings[2].classList.remove("hover");
                     break;
             }
@@ -195,7 +188,6 @@ export function getClientPointerPos(event) {
         const touch = event.touches[0] ?? event.changedTouches[0];
         clientX = touch.clientX;
         clientY = touch.clientY;
-        console.log(`Touch event at (${clientX}, ${clientY})`);
     }
     else if (event instanceof MouseEvent) {
         clientX = event.clientX;
@@ -220,18 +212,120 @@ function removeAllHoveredElements() {
         });
     });
 }
-async function deleteClone(selectedElement) {
-    console.log(selectedElement);
+export async function deleteClone(selectedElement) {
     if (selectedElement) {
         for (let size = 90; size >= 11; size = size - 8) {
             selectedElement.style.width = `${size}px`;
             selectedElement.style.height = `${size}px`;
-            console.log("hi");
-            await new Promise(resolve => setTimeout(resolve, 1));
+            await new Promise((resolve) => setTimeout(resolve, 1));
         }
         document.querySelectorAll(".dragging").forEach((el) => el.remove());
         selectedElement.remove();
     }
     else {
+    }
+}
+export async function displayWarning(warning) {
+    const gc = document.querySelector(".otrioBoardInPlay");
+    const dynamicWarning = document.querySelector(".dynamicWarnings");
+    if (dynamicWarning && gc) {
+        gc.classList.add("shake");
+        dynamicWarning.classList.add("active");
+        dynamicWarning.textContent = warning;
+        dynamicWarning.style.opacity = "1";
+        dynamicWarning.style.left = `calc(${pointer.x}px -60px )`;
+        dynamicWarning.style.top = `${pointer.y}px`;
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        dynamicWarning.classList.remove("active");
+        gc.classList.remove("shake");
+        dynamicWarning.style.opacity = "0";
+    }
+}
+window.addEventListener("pointermove", updatePointer);
+let pointer = { x: 0, y: 0 };
+export function updatePointer(e) {
+    const [x, y] = getClientPointerPos(e);
+    pointer.x = x;
+    pointer.y = y;
+}
+export function getGameData(query, queryList) {
+    const data = sessionStorage.getItem("gameData");
+    if (!data)
+        return;
+    const game = JSON.parse(data);
+    if (!queryList)
+        return game[query];
+    let queryItems = [];
+    queryList.forEach((item) => {
+        queryItems.push(game[item]);
+    });
+    return queryItems;
+}
+export async function mapPlayerVisuals(clientIds, colors, usernames) {
+    await requestClientRoomInfo(getRoomId());
+    const myId = getClientId();
+    const myColor = await getGameData("color");
+    const myUsername = sessionStorage.getItem("username");
+    const otherClientIds = clientIds.filter((id) => id !== myId);
+    const otherColors = colors.filter((color) => color !== myColor);
+    const otherUsernames = usernames.filter((name) => name !== myUsername);
+    const profileElements = Array.from(document.querySelectorAll(".profile"));
+    const profiles = new Map();
+    otherClientIds.forEach((id, index) => {
+        const profileEl = profileElements[index];
+        if (profileEl) {
+            profiles.set(id, profileEl);
+            const icon = profileEl
+                .querySelector(".playerIcon")
+                ?.querySelector(".profile-icon");
+            icon.style.color = colorConversion(otherColors[index]);
+            const rings = profileEl
+                .querySelector(".playerRingDisplay")
+                ?.querySelectorAll(".ringContainer .otrioCell .ring");
+            rings?.forEach((ring) => {
+                ring.style.stroke = colorConversion(otherColors[index]);
+            });
+            const usernameContainer = profileEl
+                .querySelector(".playerNameTag")
+                ?.querySelector(".usernameContainer");
+            if (usernameContainer) {
+                usernameContainer.textContent = otherUsernames[index];
+            }
+        }
+    });
+}
+let timerInterval = null;
+export function gameTimer(element, action) {
+    const STORAGE_KEY = "gameStartTime";
+    if (action === "start") {
+        if (timerInterval !== null)
+            return;
+        // If no stored start time, create one
+        if (!sessionStorage.getItem(STORAGE_KEY)) {
+            sessionStorage.setItem(STORAGE_KEY, Date.now().toString());
+        }
+        timerInterval = window.setInterval(() => {
+            if (!getGameData("started"))
+                return;
+            const startTime = Number(sessionStorage.getItem(STORAGE_KEY));
+            const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+            if (elapsedSeconds >= 3600) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                return;
+            }
+            const minutes = Math.floor(elapsedSeconds / 60);
+            const seconds = elapsedSeconds % 60;
+            element.textContent =
+                `${String(minutes).padStart(2, "0")}:` +
+                    `${String(seconds).padStart(2, "0")} Minutes`;
+        }, 1000);
+    }
+    if (action === "stop") {
+        if (timerInterval !== null) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        sessionStorage.removeItem(STORAGE_KEY);
     }
 }
