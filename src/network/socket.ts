@@ -188,7 +188,7 @@ ws.addEventListener("message", async (event) => {
     case "send_leave_game":
       sessionStorage.removeItem("gameData");
       console.log("exited_game");
-      window.location.assign(`menu.html`);
+      window.location.assign(`index.html`);
       gameTimer(timer, "stop");
       break;
 
