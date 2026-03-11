@@ -1,0 +1,890 @@
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-image: url("/images/gameBackground.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.pageLayout {
+    height: 90vh;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr 0.6fr;
+    gap: 2.5rem;
+
+    justify-self: center;
+    align-self: center;
+
+}
+
+.gameContainer {
+    background-color: #222;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actionTray {
+    background-color: #222;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.playerInfoContainer {
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+.cellContainer {
+    background-color: #333;
+    border-radius: 8px;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ringContainer .otrioCell {
+    width: calc(100% - 15px);
+    height: calc(100% - 10px);
+}
+
+.cell {
+    position: relative;
+    width: 85px;
+    height: 85px;
+    border-radius: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--ring-color);
+    border-radius: 0.5rem;
+    opacity: 0.65;
+    mask:
+        linear-gradient(#000 0 0) top left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) top right / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom right / 25px 25px no-repeat;
+    -webkit-mask:
+        linear-gradient(#000 0 0) top left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) top right / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom right / 25px 25px no-repeat;
+}
+
+.cell:hover::before {
+    opacity: 1;
+    cursor: grab;
+    border-width: 4px;
+}
+
+.dragging.shrink {
+    transform: scale(0.1);
+}
+
+.cell:active {
+    background-color: rgb(0, 0, 0, 0.9);
+}
+
+.profile {
+    width: 90%;
+}
+
+.profileOne {
+    background-color: #333;
+    padding: 4px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+
+}
+
+.profileTwo {
+    background-color: #333;
+    padding: 4px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+}
+
+.profileThree {
+    background-color: #333;
+    padding: 4px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+}
+
+.playerIcon {
+    margin: 2px;
+    border-radius: 8px;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerNameTag {
+    font-size: 12px;
+    margin: 2px;
+    background-color: #222;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otrioBoardInPlay {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background-color: #232323;
+    width: max-content;
+    border-radius: 6%;
+    padding: 2.5px;
+    box-shadow: 5.5px 5.5px 0.2px rgba(0, 10, 0, 0.67);
+
+    grid-row: 3 /-1;
+    align-self: center;
+    justify-self: center;
+}
+
+.otrioBoardInPlay .shake {
+    animation: shake;
+}
+
+.dynamicWarnings {
+    opacity: 0;
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.dynamicWarnings.active {
+    z-index: 100;
+    position: fixed;
+    opacity: 1;
+    animation: floatUpFade 1500ms ease-out forwards;
+}
+
+.startGameButton {
+    width: 200px;
+    height: fit-content;
+    padding: 0.9rem 0;
+    display: flex;
+
+    align-content: center;
+    justify-content: center;
+
+    background: linear-gradient(145deg, #2c2f36, #272a32);
+    color: #9aa0a6;
+
+    border: solid rgba(255, 255, 255, 0.05) 3px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    box-shadow: 2.5px 5px 0.5px rgba(0, 0, 10, 0.67), -1.5px -1.5px 0px rgba(20, 20, 20, 0.8);
+    grid-row: 3;
+    grid-column: 3;
+}
+
+.exitGameButton {
+    width: 200px;
+    height: fit-content;
+    padding: 0.9rem 0;
+    display: flex;
+
+    align-content: center;
+    justify-content: center;
+
+
+    background: linear-gradient(145deg, #2c2f36, #272a32);
+    color: #9aa0a6;
+
+    border: solid rgba(255, 255, 255, 0.05) 3px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    box-shadow: 2.5px 5px 0.5px rgba(0, 0, 10, 0.67), -1.5px -1.5px 0px rgba(20, 20, 20, 0.8);
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.startGameButton:hover {
+    position: relative;
+    transform: translate(2.5px, -2.5px);
+}
+
+.exitGameButton:hover {
+    position: relative;
+    transform: translate(2.5px, -2.5px);
+}
+
+.modal {
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 2.5px solid rgba(0, 0, 0, 0.8);
+    border-radius: 0.5rem;
+    z-index: 10;
+    background-color: rgba(0, 0, 5, 0.65);
+    width: 450px;
+    min-height: 250px;
+    max-width: 80%;
+    border: solid 5px gold;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.waitingForStart {
+    width: 70vw;
+    min-height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 16px;
+}
+
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+.startErrorMessage {
+    position: fixed;
+    opacity: 0;
+}
+
+.startErrorMessage.floatUpFade {
+    z-index: 100;
+    position: fixed;
+    opacity: 1;
+    animation: floatUpFade 1500ms ease-out forwards;
+}
+
+.waitingForStart .loader {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.waitingForStart .playerList {
+    width: 80%;
+    height: 90%;
+
+
+    grid-column: 1;
+    grid-row: 1;
+
+    background-color: #222;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.waitingForStart .codeContainer {
+    grid-row: 1;
+    width: 90%;
+    height: 30%;
+    border-radius: 8px;
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.loader {
+    display: flex;
+    align-items: center;
+}
+
+.bar {
+    display: inline-block;
+    width: 5px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    animation: scale-up4 1s linear infinite;
+}
+
+.bar:nth-child(2) {
+    height: 45px;
+    margin: 0 5px;
+    animation-delay: .25s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: .5s;
+}
+
+.roomCode {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .informationContainer {
+    background-color: #222;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: 0.3fr 0.35fr 1fr 0.35fr;
+    gap: 1rem;
+}
+
+.infoTitle {
+    grid-row: 1;
+    margin: 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.infoTitle h4 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #fff;
+}
+
+.infoTime {
+    grid-row: 2;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.roomCode {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+.infoColor {
+    grid-row: 3;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: 0.5fr 1fr;
+    gap: 1rem;
+}
+
+.infoExitGame {
+    grid-row: 4;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.dummy {
+    pointer-events: none;
+}
+
+.otrioBoardInPlay {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background-color: #232323;
+    width: max-content;
+    border-radius: 6%;
+    padding: 2.5px;
+    box-shadow: 5.5px 5.5px 0.2px rgba(0, 10, 0, 0.67);
+
+    grid-row: 3 /-1;
+    align-self: center;
+    justify-self: center;
+}
+
+.otrioBoardInPlay .shake {
+    animation: shake;
+}
+
+.gameContainer {
+    background-color: #222;
+    border-radius: 8px;
+    grid-template-rows: 1fr 0.35fr;
+    display: grid;
+}
+
+.dynamicWarnings {
+    opacity: 0;
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.dynamicWarnings.active {
+    z-index: 100;
+    position: fixed;
+    opacity: 1;
+    animation: floatUpFade 1500ms ease-out forwards;
+}
+
+.ringContainer .otrioCell {
+    width: calc(100% - 15px);
+    height: calc(100% - 10px);
+}
+
+.boardPanel {
+    background-color: #333;
+    border-radius: 8px;
+    margin: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.actionPanel {
+    background-color: #333;
+    border-radius: 8px;
+    margin: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+
+}
+
+.cellContainer {
+    background-color: #222;
+    border-radius: 8px;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell {
+    position: relative;
+    width: 85px;
+    height: 85px;
+    border-radius: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--ring-color);
+    border-radius: 0.5rem;
+    opacity: 0.65;
+    mask:
+        linear-gradient(#000 0 0) top left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) top right / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom right / 25px 25px no-repeat;
+    -webkit-mask:
+        linear-gradient(#000 0 0) top left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) top right / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom left / 25px 25px no-repeat,
+        linear-gradient(#000 0 0) bottom right / 25px 25px no-repeat;
+}
+
+.cell:hover::before {
+    opacity: 1;
+    cursor: grab;
+    border-width: 4px;
+}
+
+.dragging.shrink {
+    transform: scale(0.1);
+}
+
+.cell:active {
+    background-color: rgb(0, 0, 0, 0.9);
+}
+
+.playerInfoContainer {
+    background-color: #222;
+    display: grid;
+    gap: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr;
+}
+
+.playerInfoTitle {
+    grid-row: 1;
+    margin: 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.playerInfoTitle h4 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #fff;
+}
+
+.profileOne {
+    grid-row: 2;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: 0.75fr 1fr;
+    grid-template-columns: 0.25fr 1fr;
+    gap: 0.5rem;
+}
+
+.profileTwo {
+    grid-row: 3;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: 0.75fr 1fr;
+    grid-template-columns: 0.25fr 1fr;
+    gap: 0.5rem;
+}
+
+.profileThree {
+    grid-row: 4;
+    margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: grid;
+    grid-template-rows: 0.75fr 1fr;
+    grid-template-columns: 0.25fr 1fr;
+    gap: 0.5rem;
+}
+
+.playerIcon {
+    width: 80%;
+    height: 80%;
+    border-radius: 8px;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerNameTag {
+    width: 80%;
+    height: 80%;
+    background-color: #222;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerRingDisplay {
+    width: 80%;
+    height: 80%;
+    background-color: #222;
+    border-radius: 8px;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.25rem;
+} */

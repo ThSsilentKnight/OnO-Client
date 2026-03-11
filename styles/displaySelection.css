@@ -1,0 +1,60 @@
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-image: url("/images/displaySelectionBackgound.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.pageContainer {
+    width: 85vw;
+    height: 50vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background-color: #0000002c;
+    border-radius: 2rem;
+}
+
+.informer {
+    display: flex;
+    font-size: larger;
+    grid-column: -1/1;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mobile {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 1rem;
+}
+
+.desktop {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 1rem;
+}
+
+.type {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+    padding: 10px;
+}
+.option:hover {
+    transform: translateY(-5px)
+}

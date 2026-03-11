@@ -109,10 +109,6 @@
     }
 }
 
-.shake {
-    animation: shake 800ms ease-in-out;
-}
-
 @keyframes scale-up4 {
     20% {
         background-color: #ffff;
@@ -121,5 +117,55 @@
 
     40% {
         transform: scaleY(1);
+    }
+}
+
+@keyframes modalShake {
+    0% {
+        transform: translate(-50%, -50%) translateX(0);
+    }
+
+    20% {
+        transform: translate(-50%, -50%) translateX(-6px);
+        transform: translate(-50%, -50%) translateY(-6px);
+    }
+
+    40% {
+        transform: translate(-50%, -50%) translateX(6px);
+
+    }
+
+    60% {
+        transform: translate(-50%, -50%) translateX(-6px);
+
+    }
+
+    80% {
+        transform: translate(-50%, -50%) translateX(6px);
+        transform: translate(-50%, -50%) translateY(6px);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) translateX(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        translate: 0;
+    }
+
+    to {
+        translate: -100%;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
     }
 }

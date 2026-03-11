@@ -1,6 +1,9 @@
 import { getGameData, logMessageRequests } from "../utils/helpers.js";
 import { ws } from "./socket.js";
-
+/*
+ * requestNewRoom - Document
+  This function is called when the client hostsa new game
+*/
 export function requestNewRoom(roomId: number) {
   const request = JSON.stringify({
     request: "request_new_room",
@@ -11,6 +14,10 @@ export function requestNewRoom(roomId: number) {
   logMessageRequests(request);
 }
 
+/*
+ * requestJoinRoom - Document
+  This function is called either after a join or creation request
+*/
 export function requestJoinRoom(
   clientId: string | null,
   roomId: number | null,
@@ -22,11 +29,18 @@ export function requestJoinRoom(
     clientId: clientId,
     username: username,
   });
+  console.log(roomId, clientId, username)
 
   ws.send(request);
   logMessageRequests(request);
 }
 
+/*
+ * requestRejoinRoom - Document
+  When we reload the page, we lose connection with the server websocket, when the connection is 
+  reestablished, we can use the game state snapshot that we get from requestClientRoomInfo to rejoin
+  the room we were in.
+*/
 export function requestRejoinRoom(
   clientId: string | null,
   roomId: number | null,
@@ -50,6 +64,10 @@ export function requestRejoinRoom(
   logMessageRequests(request);
 }
 
+/*
+ * requestClientId - Document
+  Requesting Client ID from the server, when the client has lost the data
+*/
 export function requestClientId() {
   const request = JSON.stringify({
     request: "request_client_id",
@@ -59,6 +77,10 @@ export function requestClientId() {
   logMessageRequests(request);
 }
 
+/*
+ * requestBoardAction - Document
+  Main request line for taking action on the board
+*/
 export function requestBoardAction(move_id: string, roomId: number | null) {
   const request = JSON.stringify({
     request: "request_board_action",
@@ -71,6 +93,10 @@ export function requestBoardAction(move_id: string, roomId: number | null) {
   logMessageRequests(request);
 }
 
+/*
+ * RequestStartGame - Document
+  Client requesting to start the game there are in
+*/
 export function requestStartGame(roomId: number | null) {
   const request = JSON.stringify({
     request: "request_start_game",
@@ -81,6 +107,10 @@ export function requestStartGame(roomId: number | null) {
   logMessageRequests(request);
 }
 
+/*
+ * requestWinCheck - Document
+  After a client requests a board update, we need to check if that client won the game
+*/
 export function requestWinCheck(roomId: number | null, color: string | null) {
   const request = JSON.stringify({
     request: "request_win_check",
@@ -91,6 +121,13 @@ export function requestWinCheck(roomId: number | null, color: string | null) {
   ws.send(request);
   logMessageRequests(request);
 }
+
+/*
+ * validateRoomId - Document
+  When the client attempts to join, we need to make sure there is a game to join in the first place.
+
+! This function should always be used with "await".
+ */
 export function validateRoomId(roomId: number): Promise<boolean> {
   const request = JSON.stringify({
     request: "request_validate_room",
@@ -119,6 +156,14 @@ export function validateRoomId(roomId: number): Promise<boolean> {
   });
 }
 
+/* 
+* requestClientRoomInfo - Document
+In this server-client relationship, we want the bulk of infomation to be stored and handle on the server.
+This function helps us stay up to date with the state of the game, we are basically asking for a snapshot
+of the game state and useing that infomation for varuis tasks
+
+! This function should always be used with "await".
+*/
 export function requestClientRoomInfo(roomId: number) {
   const request = JSON.stringify({
     request: "request_client_room_info",

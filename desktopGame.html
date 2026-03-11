@@ -5,13 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnO Board</title>
-    <link rel="stylesheet" href="../styles/globalStyles.css">
-    <link rel="stylesheet" href="../styles/gameStyles.css">
-    <link rel="stylesheet" href="../styles/animations.css">
-    <script type="module" src="../main/index.js" defer></script>
+    <link rel="stylesheet" href="/styles/globalStyles.css">
+    <link rel="stylesheet" href="/styles/desktopGameStyles.css">
+    <link rel="stylesheet" href="/styles/animations.css">
+    <script type="module" src="/main/index.js" defer></script>
 </head>
 
 <body>
+    <div class="fadeScreen"></div>
+    <div class="onlineStatus">
+        <div class="statusContainer">
+            <span class="connectionStatus">connection Status</span>
+            <div class="statusBox">
+                <svg class="statusIndicator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 3">
+                    <circle cx="1.5" cy="1.5" r="1.5" fill="#c12c2c" />
+                </svg>
+                <span class="status">disconected</span>
+            </div>
+
+        </div>
+    </div>
     <div class="pageLayout">
 
         <div class="informationContainer">
@@ -32,33 +45,39 @@
 
                 </div>
                 <div class="nextPlayerContainer">
-
                 </div>
-
-                <div class="modal waitingForStart active" id="waitingForStart">
-                    <div class="modalHeader">
-                        <div class="modalTitle">
-                            <h5>Game Not Started</h5>
-                        </div>
-                        <button class="modalCloseButton" data-close-button>&times;</button>
-                    </div>
-
-                    <div class="modalContents mc2">
-                        <p>Waiting For Host To Start Game</p>
-                        <span class="roomCode" id="roomCode">Room Code</span>
-                        <div class="codeContainer"></div>
-                        <div class="loader">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </div>
-                        <div class="exitGameButton" id="exitGameButton"><span class="exitGameLabel">Exit Game </span>
-                        </div>
-                        <div id="startBtn" data-text="start"></div>
-                    </div>
-                </div>
-                <div class="deny active" id="overlay"></div>
             </div>
+
+            <div class="modal waitingForStart active" id="waitingForStart">
+
+                <div class="modalTitle">Game Not Started</div>
+                <div class="loader">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="playerList">
+                    <p>Waiting For Playes</p>
+                    <div class="playerCount">0/4</div>
+                </div>
+
+                <div class="startErrorMessage"></div>
+                <div class="codeContainer">
+                    <span>Room Code</span>
+                    <span class="roomCode" id="roomCode"></span>
+                </div>
+                <!-- <div id="startBtn" data-text="start"></div> -->
+                <div class="exitGameButton" id="exitGameButton">
+                    <span class="exitGameLabel">Exit Game</span>
+                </div>
+
+                <div class="startGameButton" id="startGameButton">
+                    <span class="statGameLabel">Start Game </span>
+                </div>
+            </div>
+            <div class="deny active" id="overlay"></div>
+
             <div class="infoExitGame">
                 <div class="exitGameButton" id="exitGameButton">
                     <span class="exitGameLabel">Exit Game</span>
