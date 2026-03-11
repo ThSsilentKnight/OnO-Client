@@ -15,7 +15,7 @@
     }
 
     .section1 {
-        background-image: url("/images/section1.svg");
+        background-image: url("./images/section1.svg");
 
 
         display: grid;
@@ -25,7 +25,7 @@
     }
 
     .section2 {
-        background-image: url("/images/section2.svg");
+        background-image: url("./images/section2.svg");
         min-height: 580px;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
