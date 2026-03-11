@@ -13,8 +13,8 @@ import {
   validateRoom,
 } from "./requestResponse.js";
 import { requestRejoinRoom } from "./requests.js";
-//export const ws = new WebSocket(`wss://api.silentknightssh.com`);
-export const ws = new WebSocket("ws://localhost:8080");
+export const ws = new WebSocket(`wss://api.silentknightssh.com`);
+//export const ws = new WebSocket("ws://localhost:8080");
 
 ws.addEventListener("open", async () => {
   connectClientSetUp();
