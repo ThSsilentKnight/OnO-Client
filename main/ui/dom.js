@@ -24,7 +24,7 @@ export const dragableItems = document.querySelectorAll(".cell");
 export const dragableContainer = document.getElementById("gameContainer");
 export const body = document.body;
 export const gameContainer = document.querySelector(".pageLayout");
-if (window.location.pathname === "/game.html" ||
+if (window.location.pathname === "/desktopGame.html" ||
     window.location.pathname === "/mobileGame.html") {
     const board = document.querySelector(".otrioBoardInPlay");
     const fullRing = board.querySelectorAll(".otrioCell");

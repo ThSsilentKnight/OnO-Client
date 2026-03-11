@@ -41,7 +41,7 @@ export const gameContainer = document.querySelector(
 ) as HTMLElement;
 
 if (
-  window.location.pathname === "/game.html" ||
+  window.location.pathname === "/desktopGame.html" ||
   window.location.pathname === "/mobileGame.html"
 ) {
   const board = document.querySelector(".otrioBoardInPlay");

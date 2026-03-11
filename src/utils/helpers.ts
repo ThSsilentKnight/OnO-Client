@@ -572,15 +572,15 @@ export function changeClientWindow(location: string, roomId?: string) {
 
   setTimeout(() => {
     if (location === "home") {
-      if (platform === "mobile") window.location.assign("mobile.html");
-      if (platform === "desktop") window.location.assign("index.html");
+      if (platform === "mobile") window.location.assign("mobileMenu.html");
+      if (platform === "desktop") window.location.assign("desktopMenu.html");
     }
 
     if (location === "game") {
       if (platform === "mobile")
         window.location.assign(`mobileGame.html#id=${roomId}`);
       if (platform === "desktop")
-        window.location.assign(`game.html#id=${roomId}`);
+        window.location.assign(`desktopGame.html#id=${roomId}`);
     }
   }, 1500);
 }
