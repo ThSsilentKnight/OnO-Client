@@ -468,8 +468,9 @@
         justify-self: center;
     }
 
-    .otrioBoardInPlay .shake {
-        animation: shake;
+    .otrioBoardInPlay.shake {
+        animation: shake ease;
+        background-color: #000;
     }
 
     .profileOne {

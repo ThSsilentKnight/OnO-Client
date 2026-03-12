@@ -2,7 +2,7 @@
   "name": "online-otrio",
   "version": "1.0.0",
   "description": "",
-  "main": "main/app.js",
+  "main": "main/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ThSsilentKnight/OnO-Client.git"

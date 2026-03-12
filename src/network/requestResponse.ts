@@ -35,13 +35,6 @@ export function leaveGame() {
   gameTimer(timer, "stop");
 }
 export function decreaseRingSize(request: any) {
-  const [large, med, small] = getGameData("", [
-    "largeRings",
-    "mediumRings",
-    "smallRings",
-  ]) as number[];
-  console.log(request.size);
-
   if (request.size === "small") {
     // *const ringCount = small;
     // * sessionStorage.setItem("smallRingCount", String(ringCount - 1));
@@ -163,10 +156,10 @@ export async function regenerateBoardResponse(request: any) {
 
 export async function playerHasWonResponse(request: any) {
   document.querySelector(".gameWinInfo")!.textContent =
-    `${request.color} has won the game`;
+    `${request.username} has won the game`;
 
   (document.querySelector(".gameWinInfo") as HTMLElement).style.color =
-    colorConversion(getGameData("color"));
+    colorConversion(request.color);
   gameTimer(timer, "stop");
   openModal(document.getElementById("gameEnded"));
   await requestClientRoomInfo(getRoomId()!);
