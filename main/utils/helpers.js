@@ -368,6 +368,8 @@ export function getGameData(query, queryList) {
   to their respective slots on the game layout, while making sure to only show the
   other players in game.
 */
+export let profiles = new Map();
+export let colorToElement = new Map();
 export async function mapPlayerVisuals(clientIds, colors, usernames) {
     await requestClientRoomInfo(getRoomId());
     const myId = getClientId();
@@ -377,16 +379,16 @@ export async function mapPlayerVisuals(clientIds, colors, usernames) {
     const otherColors = colors.filter((color) => color !== myColor);
     const otherUsernames = usernames.filter((name) => name !== myUsername);
     const profileElements = Array.from(document.querySelectorAll(".profile"));
-    const profiles = new Map();
     const playerCount = document.querySelector(".playerCount");
+    sessionStorage.setItem("colorMap", JSON.stringify(otherColors));
     if (playerCount) {
         playerCount.textContent = `${getGameData("players")}/4`;
     }
-    console.log(playerCount);
     otherClientIds.forEach((id, index) => {
         const profileEl = profileElements[index];
         if (profileEl) {
             profiles.set(id, profileEl);
+            colorToElement.set(otherColors[index], profileEl);
             const icon = profileEl
                 .querySelector(".playerIcon")
                 ?.querySelector(".profile-icon");
@@ -515,7 +517,7 @@ window.addEventListener("load", () => {
     }
 });
 /*
-* pageFade - Document
+*
   
 */
 export function currentTurnIndicator() {

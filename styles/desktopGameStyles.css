@@ -432,6 +432,7 @@
     }
 
     .playerInfoTitle {
+        position: relative;
         grid-row: 1;
         margin: 0.5rem;
         background-color: #333;
@@ -473,41 +474,58 @@
         background-color: #000;
     }
 
-    .profileOne {
-        grid-row: 2;
-        margin: -0.5rem 0.5rem 0.5rem 0.5rem;
-        background-color: #333;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        display: grid;
-        grid-template-rows: 0.75fr 1fr;
-        grid-template-columns: 0.25fr 1fr;
-        gap: 0.5rem;
+    .profile {
+        position: relative;
     }
 
-    .profileTwo {
-        grid-row: 3;
+    .profileBackground {
+        position: relative;
         margin: -0.5rem 0.5rem 0.5rem 0.5rem;
-        background-color: #333;
+        background: #333;
         padding: 0.5rem 1rem;
         border-radius: 8px;
         display: grid;
         grid-template-rows: 0.75fr 1fr;
         grid-template-columns: 0.25fr 1fr;
         gap: 0.5rem;
+        z-index: 5;
     }
 
-    .profileThree {
-        grid-row: 4;
-        margin: -0.5rem 0.5rem 0.5rem 0.5rem;
-        background-color: #333;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        display: grid;
-        grid-template-rows: 0.75fr 1fr;
-        grid-template-columns: 0.25fr 1fr;
-        gap: 0.5rem;
+    @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
     }
+
+    .profile.active::after {
+
+
+        padding: 0.1rem 0.5rem 0.5rem 0.5rem;
+        border-radius: 8px;
+        margin: -0.5rem 0.5rem 0.5rem 0.5rem;
+        width: calc(100% - 1.5rem);
+        height: 100%;
+        content: "";
+        position: absolute;
+        left: 47.5%;
+        top: 50%;
+        translate: -50% -50%;
+
+        background-image: conic-gradient(from var(--angle), transparent 70%, var(--indicator-color));
+        z-index: 0;
+        animation: 2.5s cycle linear infinite;
+    }
+
+    @keyframes cycle {
+        from {
+            --angle: 0deg
+        }
+
+        to {
+            --angle: 360deg
+        }
+    }
+
 
     .playerIcon {
         width: 100%;
@@ -517,6 +535,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
     .playerNameTag {

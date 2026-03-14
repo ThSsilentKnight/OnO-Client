@@ -3,11 +3,13 @@ import {
   changeClientWindow,
   closeModal,
   colorConversion,
+  colorToElement,
   gameTimer,
   getGameData,
   getRoomId,
   mapPlayerVisuals,
   openModal,
+  profiles,
   regenerateBoard,
   restart,
 } from "../utils/helpers.js";
@@ -36,8 +38,6 @@ export function leaveGame() {
 }
 export function decreaseRingSize(request: any) {
   if (request.size === "small") {
-    // *const ringCount = small;
-    // * sessionStorage.setItem("smallRingCount", String(ringCount - 1));
     let cellCount = document.querySelector(".smallCellCount");
 
     if (cellCount) {
@@ -49,8 +49,6 @@ export function decreaseRingSize(request: any) {
   }
 
   if (request.size === "medium") {
-    // *const ringCount = med;
-    // * sessionStorage.setItem("mediumRingCount", String(ringCount - 1));
     let cellCount = document.querySelector(".mediumCellCount");
     if (cellCount) {
       let index = cellCount.textContent.split("")[0];
@@ -61,8 +59,6 @@ export function decreaseRingSize(request: any) {
   }
 
   if (request.size === "large") {
-    // *const ringCount = large;
-    // *sessionStorage.setItem("largeRingCount", String(ringCount - 1));
     let cellCount = document.querySelector(".largeCellCount");
     if (cellCount) {
       let index = cellCount.textContent.split("")[0];
@@ -163,4 +159,26 @@ export async function playerHasWonResponse(request: any) {
   gameTimer(timer, "stop");
   openModal(document.getElementById("gameEnded"));
   await requestClientRoomInfo(getRoomId()!);
+}
+
+export function updateTurnIndicator(color: string) {
+  document.querySelectorAll(".profile").forEach((e) => {
+    e.classList.remove("active");
+  });
+  const colorsInGame = sessionStorage.getItem("colorMap");
+  if (!colorsInGame) return;
+  console.log(colorsInGame);
+  console.log(color);
+  console.log(colorToElement.get(color));
+  if (colorsInGame.includes(color)) {
+    const targetColor = colorToElement.get(color);
+    if (!targetColor) {
+      return;
+    }
+    targetColor.classList.add("active");
+    document.documentElement.style.setProperty(
+      "--indicator-color",
+      colorConversion(color || "rba(10, 10, 10)"),
+    );
+  }
 }

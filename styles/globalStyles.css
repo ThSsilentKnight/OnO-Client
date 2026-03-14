@@ -49,6 +49,10 @@ p {
     animation: fadeInPause 4.5s linear forwards;
 }
 
+.shake {
+    animation: shake;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 1;

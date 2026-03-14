@@ -1,9 +1,9 @@
 import { status, StatusIndicator, StatusIndicatorGlow } from "../ui/dom.js";
-import { displayWarning, getClientId, getRoomId } from "../utils/helpers.js";
-import { boardUpdateResponse, declineStartGameRequest, decreaseRingSize, leaveGameResponse, mapClientsResponse, playerHasWonResponse, regenerateBoardResponse, ringIdUpdate, startGameResponse, validateRoom, } from "./requestResponse.js";
+import { displayWarning, getClientId, getRoomId, } from "../utils/helpers.js";
+import { boardUpdateResponse, declineStartGameRequest, decreaseRingSize, leaveGameResponse, mapClientsResponse, playerHasWonResponse, regenerateBoardResponse, ringIdUpdate, startGameResponse, updateTurnIndicator, validateRoom, } from "./requestResponse.js";
 import { requestRejoinRoom } from "./requests.js";
-export const ws = new WebSocket(`wss://api.silentknightssh.com`);
-//export const ws = new WebSocket("ws://localhost:8080");
+//export const ws = new WebSocket(`wss://api.silentknightssh.com`);
+export const ws = new WebSocket("ws://localhost:8080");
 ws.addEventListener("open", async () => {
     connectClientSetUp();
 });
@@ -56,7 +56,7 @@ ws.addEventListener("message", async (event) => {
             validateRoom(request);
             break;
         case "send_client_room_info":
-            // Code for this function is running in 
+            // Code for this function is running in
             // requests.ts/js | data gets pushed to session storage
             break;
         case "send_map_clients":
@@ -64,6 +64,9 @@ ws.addEventListener("message", async (event) => {
             break;
         case "send_leave_game":
             leaveGameResponse();
+            break;
+        case "request_profile_update":
+            updateTurnIndicator(request.color);
             break;
         default:
             console.warn("Unknown action:", request.action);
@@ -139,4 +142,4 @@ function disconnectClient() {
 ⠈⣿⣿⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣷⡙⢷⣦⣔⣈⠉⠛⠩⠛⢁⣉⣴⡾⢋⣼⣿⣟⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⡄⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⢿⣿⣿⣿⣿⣿⣿⣿⣿⡆⢻⣿⣿⣿⣷⣭⣛⠻⠿⠿⠿⠿⠿⢛⣫⣴⣿⣿⣿⠇⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠹⣿⣿⣿⣿⣿⣿⣿⣿⡌⠿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⢿⢿⣿⣿⣿⡿⠏⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-*/ 
+*/
